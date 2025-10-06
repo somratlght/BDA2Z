@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ভেন্ডর ড্যাশবোর্ড - BDA2Z</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f4f4f4; }
+    h1, h2 { color: #333; }
+    input, button { display: block; margin: 10px 0; padding: 8px; width: 95%; }
+    .product { background: #fff; padding: 10px; margin-bottom: 10px; border-radius: 5px; }
+    img { max-width: 80px; margin-top: 5px; }
+  </style>
+</head>
+<body>
+  <h1>ভেন্ডর ড্যাশবোর্ড - BDA2Z</h1>
+
+  <h2>প্রোডাক্ট যোগ করুন</h2>
+  <form id="add-product-form">
+    <input type="text" id="pname" placeholder="প্রোডাক্ট নাম" required>
+    <input type="number" id="pprice" placeholder="মূল্য" required>
+    <input type="number" id="pstock" placeholder="স্টক" required>
+    <input type="text" id="pcategory" placeholder="ক্যাটাগরি" required>
+    <input type="text" id="pimage" placeholder="ইমেজ URL" required>
+    <button type="submit">প্রোডাক্ট যোগ করুন</button>
+  </form>
+
+  <h2>আমার প্রোডাক্টস</h2>
+  <div id="vendor-products">
+    <div class="product">
+      <b>ফ্যাশন আইটেম ১</b> - ৳500 - স্টক: 10 - ক্যাটাগরি: ফ্যাশন<br>
+      <img src="images/product1.jpg" alt="ফ্যাশন আইটেম ১"><br>
+      <button onclick="alert('Remove Product');">মুছে ফেলুন</button>
+      <button onclick="alert('Update Stock');">স্টক আপডেট</button>
+    </div>
+  </div>
+</body>
+</html>
