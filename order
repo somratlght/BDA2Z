@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>অর্ডার মনিটর - BDA2Z</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+  <h1>মেডারেটর - অর্ডার মনিটর</h1>
+  <nav>
+    <a href="index.html">হোম</a> |
+    <a href="vendor_dashboard.html">ভেন্ডর ড্যাশবোর্ড</a> |
+    <a href="order.html">অর্ডার মনিটর</a>
+  </nav>
+</header>
+
+<h2>সকল অর্ডার</h2>
+<div id="order-list-monitor">
+  <h3>অর্ডার তালিকা</h3>
+</div>
+
+<script src="js/main.js"></script>
+<script>
+  // এই পেজে শুধুমাত্র মেডারেটর জন্য অর্ডার দেখানো হবে
+  if(document.getElementById('order-list-monitor')){
+    const monitorDiv = document.getElementById('order-list-monitor');
+
+    function renderMonitorOrders(){
+      let html = '<h3>অর্ডার তালিকা</h3>';
+      orders.forEach((o,i)=>{
+        html += `<div class="order">
+          ${i+1}. ${o.customer} (${o.phone}) - ${o.product} - মোট: ৳${o.total} (কুরিয়ার: ৳${o.courier}) - পেমেন্ট: ${o.payment}
+        </div>`;
+      });
+      monitorDiv.innerHTML = html;
+    }
+
+    // প্রতিদিন বা লোডের সময় অর্ডার রেন্ডার
+    renderMonitorOrders();
+
+    // 5 সেকেন্ডে একবার অর্ডার আপডেট দেখাবে (ডাইনামিক)
+    setInterval(renderMonitorOrders, 5000);
+  }
+</script>
+</body>
+</html>
