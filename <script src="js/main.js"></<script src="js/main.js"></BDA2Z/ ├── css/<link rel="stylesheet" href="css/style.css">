@@ -1,0 +1,56 @@
+/* ================= সাধারণ স্টাইল ================= */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f7f7f7;
+}
+
+h3 {
+  color: #333;
+}
+
+/* ================= প্রোডাক্ট কার্ড ================= */
+.product {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px;
+  display: inline-block;
+  width: 45%;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.product img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+/* ================= অর্ডার তালিকা ================= */
+.order {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  margin: 5px 0;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+/* ================= ফর্ম ================= */
+form input, form select, form button {
+  margin: 5px 0;
+  padding: 6px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+form button {
+  background-color: #ffd600;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+form button:hover {
+  background-color: #ffb600;
+}
