@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BDA2Z - হোম</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f4f4f4; }
+    header { background: #ffd600; padding: 10px; text-align: center; }
+    nav a { margin: 0 10px; text-decoration: none; color: black; }
+    .product { background: #fff; padding: 10px; margin-bottom: 10px; border-radius: 5px; }
+    img { max-width: 100%; height: auto; display: block; margin-top: 5px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>BDA2Z - বাংলাদেশ মাল্টি-ভেন্ডর ই-কমার্স</h1>
+    <nav>
+      <a href="index.html">হোম</a> |
+      <a href="vendor_dashboard.html">ভেন্ডর ড্যাশবোর্ড</a>
+    </nav>
+  </header>
+
+  <h2>ফিচারড প্রোডাক্টস</h2>
+  <div id="products">
+    <div class="product">
+      <h3>ফ্যাশন আইটেম ১</h3>
+      <p>মূল্য: ৳500</p>
+      <img src="images/product1.jpg" alt="ফ্যাশন আইটেম ১">
+    </div>
+    <div class="product">
+      <h3>হেলথ কেয়ার ১</h3>
+      <p>মূল্য: ৳1200</p>
+      <img src="images/product2.jpg" alt="হেলথ কেয়ার ১">
+    </div>
+  </div>
+</body>
+</html>
