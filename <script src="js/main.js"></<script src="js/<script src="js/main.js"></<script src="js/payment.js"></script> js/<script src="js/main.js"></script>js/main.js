@@ -1,0 +1,142 @@
+// ================= প্রোডাক্ট ডাটা =================
+let products = [
+  { name: "ফ্যাশন আইটেম ১", price: 500, category: "ফ্যাশন", image: "images/product1.jpg" },
+  { name: "হেলথ কেয়ার ১", price: 1200, category: "হেলথ", image: "images/product2.jpg" }
+];
+
+// ================= ভেন্ডর প্রোডাক্ট =================
+let vendorProducts = [
+  { name: "ফ্যাশন আইটেম ১", price: 500, stock: 10, category: "ফ্যাশন", image: "images/product1.jpg" }
+];
+
+// ================= অর্ডার ডাটা =================
+let orders = [];
+
+// ================= index.html - কাস্টমার অর্ডার =================
+if(document.getElementById('products')){
+  const productsDiv = document.getElementById('products');
+  const productSelect = document.getElementById('productSelect');
+  const orderForm = document.getElementById('order-form');
+  const orderList = document.getElementById('order-list');
+
+  // প্রোডাক্ট দেখানো
+  function renderProducts(filterCategory = null) {
+    productsDiv.innerHTML = '';
+    productSelect.innerHTML = '';
+    let displayProducts = filterCategory ? products.filter(p => p.category === filterCategory) : products;
+    displayProducts.forEach((p,i) => {
+      productsDiv.innerHTML += `<div class="product">
+        <h3>${p.name}</h3>
+        <p>মূল্য: ৳${p.price}</p>
+        <p>ক্যাটাগরি: ${p.category}</p>
+        <img src="${p.image}" alt="${p.name}">
+      </div>`;
+      productSelect.innerHTML += `<option value="${i}">${p.name} - ৳${p.price}</option>`;
+    });
+  }
+  renderProducts();
+
+  // অর্ডার সাবমিশন
+  orderForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    const customer = document.getElementById('customer').value;
+    const phone = document.getElementById('phone').value;
+    const productIndex = document.getElementById('productSelect').value;
+    const location = document.getElementById('location').value;
+    const payment = document.getElementById('paymentMethod').value;
+    const courierCharge = location === "Dhaka" ? 70 : 120;
+
+    if(products[productIndex].stock === 0){
+      alert('স্টক শেষ, অর্ডার নেওয়া যাচ্ছে না');
+      return;
+    }
+
+    const order = {
+      customer, phone,
+      product: products[productIndex].name,
+      price: products[productIndex].price,
+      courier: courierCharge,
+      total: products[productIndex].price + courierCharge,
+      payment
+    };
+    orders.push(order);
+    renderOrders();
+    this.reset();
+  });
+
+  function renderOrders(){
+    let html = '<h3>অর্ডার তালিকা</h3>';
+    orders.forEach((o,i)=>{
+      html += `<div class="order">
+        ${i+1}. ${o.customer} (${o.phone}) - ${o.product} - মোট: ৳${o.total} (কুরিয়ার: ৳${o.courier}) - পেমেন্ট: ${o.payment}
+      </div>`;
+    });
+    orderList.innerHTML = html;
+  }
+}
+
+// ================= vendor_dashboard.html =================
+if(document.getElementById('vendor-products')){
+  const vendorDiv = document.getElementById('vendor-products');
+  const addProductForm = document.getElementById('add-product-form');
+
+  function renderVendorProducts() {
+    vendorDiv.innerHTML = '';
+    vendorProducts.forEach((p,i) => {
+      vendorDiv.innerHTML += `<div class="product">
+        <b>${p.name}</b> - ৳${p.price} - স্টক: ${p.stock} - ক্যাটাগরি: ${p.category}<br>
+        <img src="${p.image}" alt="${p.name}"><br>
+        <button onclick="removeProduct(${i})">মুছে ফেলুন</button>
+        <button onclick="updateStock(${i})">স্টক আপডেট</button>
+      </div>`;
+    });
+  }
+
+  function removeProduct(index) {
+    if(confirm('আপনি কি প্রোডাক্টটি মুছে ফেলতে চান?')){
+      vendorProducts.splice(index,1);
+      renderVendorProducts();
+    }
+  }
+
+  function updateStock(index) {
+    const newStock = prompt('নতুন স্টক লিখুন:', vendorProducts[index].stock);
+    if(newStock !== null){
+      vendorProducts[index].stock = parseInt(newStock);
+      renderVendorProducts();
+    }
+  }
+
+  addProductForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    const pname = document.getElementById('pname').value;
+    const pprice = parseInt(document.getElementById('pprice').value);
+    const pstock = parseInt(document.getElementById('pstock').value);
+    const pcategory = document.getElementById('pcategory').value;
+    const pimage = document.getElementById('pimage').value;
+
+    vendorProducts.push({ name:pname, price:pprice, stock:pstock, category:pcategory, image:pimage });
+    renderVendorProducts();
+    this.reset();
+  });
+
+  renderVendorProducts();
+}
+
+// ================= order.html - মেডারেটর =================
+if(document.getElementById('order-list-monitor')){
+  const monitorDiv = document.getElementById('order-list-monitor');
+
+  function renderMonitorOrders(){
+    let html = '<h3>অর্ডার তালিকা</h3>';
+    orders.forEach((o,i)=>{
+      html += `<div class="order">
+        ${i+1}. ${o.customer} (${o.phone}) - ${o.product} - মোট: ৳${o.total} (কুরিয়ার: ৳${o.courier}) - পেমেন্ট: ${o.payment}
+      </div>`;
+    });
+    monitorDiv.innerHTML = html;
+  }
+
+  renderMonitorOrders();
+  setInterval(renderMonitorOrders, 5000);
+      }
